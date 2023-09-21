@@ -153,7 +153,6 @@ SETUP_UTILS=(
 	'dust'
 	'git'
 	'grex'
-	'nano'
 	'ripgrep'
 	'rust'
 	'starship'
@@ -162,3 +161,7 @@ SETUP_UTILS=(
 	'wget'
 	'zsh'
 )
+
+if ! is-mac; then
+	SETUP_UTILS+=('nano')
+fi
