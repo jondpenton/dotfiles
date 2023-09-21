@@ -46,43 +46,46 @@ APT_INSTALL=(
 # Used by `setup-mac-brew`
 # You can use `setup-mac-brew --configure` to configure some of these.
 # HOMEBREW_UNTAPS=()
+
 HOMEBREW_TAPS=(
 	'greymd/tools'
-	'homebrew/cask-fonts'
 	'homebrew/cask-versions'
 	'rsteube/tap'
 )
+
+# 'ffmpeg'
 HOMEBREW_FORMULAS=(
 	'direnv'
-	# 'ffmpeg'
 	'ghq'
 	'rsteube/tap/carapace'
 )
+
 # HOMEBREW_SLOW_FORMULAS=()
+
+# 'dbeaver-community'
+# 'discord'
+# 'docker'
+# 'firefox-developer-edition'
+# 'folding-at-home'
+# 'microsoft-teams'
+# 'skype'
+# 'slack'
+# 'steam'
+# 'vnc-viewer'
+# 'zoom'
 HOMEBREW_CASKS=(
 	'alfred'
 	'appcleaner'
-	# 'dbeaver-community'
-	# 'discord'
-	# 'docker'
-	# 'firefox-developer-edition'
-	# 'folding-at-home'
 	'google-chrome'
 	'insomnia'
 	'keka'
-	# 'microsoft-teams'
 	'obsidian'
 	'pgadmin4'
-	# 'skype'
-	# 'slack'
 	'spotify'
-	# 'steam'
 	'tailscale'
-	'visual-studio-code'
 	'vlc'
-	# 'vnc-viewer'
-	# 'zoom'
 )
+
 HOMEBREW_FONTS=(
 	'font-cantarell'
 	'font-cascadia-code'
@@ -110,7 +113,7 @@ HOMEBREW_FONTS=(
 	'font-ubuntu'
 )
 # HOMEBREW_UNINSTALL=()        # for casks and formulas
-HOMEBREW_ENCODING_INSTALL='yes' # '', 'yes', 'no'
+HOMEBREW_ENCODING_INSTALL='no' # '', 'yes', 'no'
 
 # Golang / go
 # Used by `setup-go`
@@ -140,17 +143,17 @@ HOMEBREW_ENCODING_INSTALL='yes' # '', 'yes', 'no'
 # Utilities to install, these are the [setup-util-*] scripts
 # Used by `setup-utils`
 # You can use `setup-utils --configure` to configure these.
+# 'docker'
+# 'nu'
 SETUP_UTILS=(
 	'bash'
 	'bat'
 	'brew'
 	'curl'
-	# 'docker'
 	'dust'
 	'git'
 	'grex'
 	'nano'
-	# 'nu'
 	'ripgrep'
 	'rust'
 	'starship'
