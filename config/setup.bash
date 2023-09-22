@@ -89,7 +89,6 @@ HOMEBREW_ENCODING_INSTALL='no' # '', 'yes', 'no'
 # Used by `setup-utils`
 # You can use `setup-utils --configure` to configure these.
 # 'docker'
-# 'nu'
 SETUP_UTILS=(
 	'bash'
 	'bat'
@@ -98,6 +97,7 @@ SETUP_UTILS=(
 	'dust'
 	'git'
 	'grex'
+	'nu'
 	'ripgrep'
 	'rust'
 	'starship'
