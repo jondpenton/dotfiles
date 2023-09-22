@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Load defualts
+source "$DOROTHY/commands/setup-util-starship"
+
+function is-wsl() (
+	return 1
+)
+
+# fire if invoked standalone
+if test "$0" = "${BASH_SOURCE[0]}"; then
+	setup_util_starship "$@"
+fi
