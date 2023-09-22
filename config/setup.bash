@@ -5,42 +5,12 @@
 # Load defaults
 source "$DOROTHY/config/setup.bash"
 
-# APK
-# Used by `setup-linux`
-# APK_INSTALL=()
-
 # Apt / apt-get
 # Used by `setup-linux`
 # APT_UNINSTALL=()
 APT_INSTALL=(
 	'traceroute'
 )
-
-# AUR / pamac / pacman / yay / paru / pakku / aurutils
-# Used by `setup-linux`
-# AUR_INSTALL=()
-
-# Flatpak
-# Used by `setup-linux`
-# FLATPAK_INSTALL=()
-
-# RPM / dnf / yum
-# Used by `setup-linux`
-# RPM_INSTALL=()
-
-# Snap
-# Used by `setup-linux`
-# SNAP_INSTALL=()
-
-# Zypper
-# Used by `setup-linux`
-# ZYPPER_INSTALL=()
-
-# macOS App Store / mas / https://github.com/mas-cli/mas
-# Used by `setup-mac-appstore`
-# You can use `mas list` and `mas search` to find apps
-# MAS_INSTALL=() # tupe array of id, label
-# MAS_UPGRADE='no'
 
 # Homebrew / brew / https://brew.sh
 # Used by `setup-mac-brew`
@@ -115,31 +85,6 @@ HOMEBREW_FONTS=(
 # HOMEBREW_UNINSTALL=()        # for casks and formulas
 HOMEBREW_ENCODING_INSTALL='no' # '', 'yes', 'no'
 
-# Golang / go
-# Used by `setup-go`
-# GO_LINTING_INSTALL='' # '', 'yes', 'no'
-# GO_INSTALL=()
-
-# Node.js
-# Used by `setup-node`
-# NPM_INSTALL=()
-
-# Python
-# Used by `setup-python`
-# PYTHON_INSTALL=()
-# PIP_INSTALL=()
-# PYTHON2_PIP_INSTALL=()
-# PYTHON3_PIP_INSTALL=()
-# PIPX_INSTALL=()
-
-# Ruby
-# Used by `setup-ruby`
-# GEM_INSTALL=()
-
-# Rust / Cargo / Crates.io
-# Used by `setup-rust`
-# CARGO_INSTALL=()
-
 # Utilities to install, these are the [setup-util-*] scripts
 # Used by `setup-utils`
 # You can use `setup-utils --configure` to configure these.
@@ -157,11 +102,14 @@ SETUP_UTILS=(
 	'rust'
 	'starship'
 	'vim'
-	'vscode'
 	'wget'
 	'zsh'
 )
 
 if ! is-mac; then
 	SETUP_UTILS+=('nano')
+fi
+
+if ! is-wsl; then
+	SETUP_UTILS+=('vscode')
 fi
