@@ -34,7 +34,6 @@ HOMEBREW_FORMULAS=(
 
 # 'dbeaver-community'
 # 'discord'
-# 'docker'
 # 'firefox-developer-edition'
 # 'folding-at-home'
 # 'microsoft-teams'
