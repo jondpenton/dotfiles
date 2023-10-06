@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+function setup_util_ffmpeg() (
+	source "$DOROTHY/sources/bash.bash"
+
+	# improve performance
+	if is-needle --quiet "$@" && ! is-needle --upgrade "$@" && ! is-needle --uninstall "$@" && command-exists bat; then
+		return 0
+	fi
+
+	# despite docs, no apk
+	local arch options=(
+		--cli='ffmpeg'
+		"$@"
+		APT='ffmpeg' # Ubuntu
+	)
+
+	function add_download_option {
+		options+=(
+			DOWNLOAD="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$1"
+			DOWNLOAD_UNZIP_FILTER='*/ffmpeg'
+		)
+	}
+
+	arch="$(get-arch)"
+
+	if is-linux; then
+		if test "$arch" = 'a64'; then
+			add_download_option '-arm64-static.tar.xz'
+		elif test "$arch" = 'a32'; then
+			add_download_option '-armhf-static.tar.xz'
+		elif test "$arch" = 'x64'; then
+			add_download_option '-amd64-static.tar.xz'
+		elif test "$arch" = 'x32'; then
+			add_download_option '-i686-static.tar.xz'
+		fi
+	fi
+
+	setup-util "${options[@]}"
+)
+
+# fire if invoked standalone
+if test "$0" = "${BASH_SOURCE[0]}"; then
+	setup_util_ffmpeg "$@"
+fi
