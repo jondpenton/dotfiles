@@ -105,10 +105,8 @@ SETUP_UTILS=(
 	'zsh'
 )
 
-if ! is-mac; then
-	SETUP_UTILS+=('nano')
-fi
-
-if ! is-wsl; then
+if is-mac; then
 	SETUP_UTILS+=('vscode')
+else
+	SETUP_UTILS+=('nano')
 fi
