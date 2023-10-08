@@ -20,7 +20,7 @@ def main [
   file: path
   extension: string
 ]: any -> any {
- if (^command-exists ffmpeg | complete | $in.exit_code) == 0 {
-  ffmpeg_convert_video $file $extension
- }
+  if (^command-exists ffmpeg | complete).exit_code == 0 {
+    ffmpeg_convert_video $file $extension
+  }
 }

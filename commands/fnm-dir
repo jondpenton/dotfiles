@@ -1,0 +1,8 @@
+#!/usr/bin/env nu
+
+^fnm env --shell bash
+  | lines
+  | filter { 'FNM_DIR' in $in }
+  | each { parse `export FNM_DIR="{path}"` }
+  | flatten
+  | $in.0.path
