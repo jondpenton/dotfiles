@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-def fnm_node_versions_dir [] {
+def fnm_node_versions_dir []: any -> string {
   ^fnm-dir | path join node-versions
 }
 
