@@ -1,0 +1,3 @@
+#!/usr/bin/env nu
+
+^git rev-parse --show-toplevel | str trim
