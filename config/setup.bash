@@ -27,7 +27,6 @@ HOMEBREW_TAPS=(
 HOMEBREW_FORMULAS=(
 	'direnv'
 	'ghq'
-	'rsteube/tap/carapace'
 )
 
 # HOMEBREW_SLOW_FORMULAS=()
@@ -92,6 +91,7 @@ SETUP_UTILS=(
 	'bash'
 	'bat'
 	'brew'
+	'carapace'
 	'curl'
 	'dust'
 	'git'
