@@ -27,9 +27,21 @@ function setup_util_nu() (
 		# trunk-ignore(shellcheck/SC2016)
 		mkdir -p "$(nu -c 'echo $nu.default-config-dir')"
 
-		# ensure [themes/starship.nu] works for [themes/starship.nu] to set it up later
+		# ensure [themes/starship.nu] works
 		mkdir -p "$XDG_STATE_HOME/starship"
-		touch "$XDG_STATE_HOME/starship/init.nu"
+		if command-exists starship; then
+			starship init nu >"$XDG_STATE_HOME/starship/init.nu"
+		else
+			touch "$XDG_STATE_HOME/starship/init.nu"
+		fi
+
+		# ensure [sources/autocomplete.nu] works
+		mkdir -p "$XDG_STATE_HOME/carapace"
+		if command-exists carapace; then
+			carapace _carapace nushell >"$XDG_STATE_HOME/carapace/init.nu"
+		else
+			touch "$XDG_STATE_HOME/carapace/init.nu"
+		fi
 
 		# ensure [sources/interactive.nu] works
 		if test ! -f "$DOROTHY/user/config.local/interactive.nu"; then
@@ -72,53 +84,55 @@ function setup_util_nu() (
 		# SCOOP='nu'
 		# WINGET='nushell'
 	)
-	# function get_github_asset_url {
-	# 	github-download \
-	# 		--dry \
-	# 		--slug='nushell/nushell' \
-	# 		--release='latest' \
-	# 		--asset-filter="$(echo-escape-regex -- "$1")$" | echo-first-line || :
-	# }
-	# function add_download_option {
-	# 	options+=(
-	# 		DOWNLOAD="$(get_github_asset_url "$1")"
-	# 		DOWNLOAD_UNZIP_FILTER='*/nu'
-	# 	)
-	# }
+	function get_github_asset_url {
+		github-download \
+			--dry \
+			--slug='nushell/nushell' \
+			--release='latest' \
+			--asset-filter="$(echo-escape-regex -- "$1")$" | echo-first-line || :
+	}
+	function add_download_option {
+		options+=(
+			DOWNLOAD="$(get_github_asset_url "$1")"
+			DOWNLOAD_UNZIP_FILTER="$2"
+		)
+	}
+	arch="$(get-arch)"
+	if is-mac; then
+		if test "$arch" = 'a64'; then
+			add_download_option '-aarch64-darwin-full.tar.gz' '*/nu'
+		else
+			add_download_option '-x86_64-darwin-full.tar.gz' '*/nu'
+		fi
+	elif is-linux; then # includes wsl
+		# if test "$arch" = 'r64'; then
+		# 	add_download_option '-riscv64gc-unknown-linux-gnu.tar.gz' '*/nu'
+		if test "$arch" = 'a64'; then
+			add_download_option '-aarch64-linux-gnu-full.tar.gz' '*/nu'
+		# elif test "$arch" = 'a32'; then
+		# 	add_download_option '-armv7-unknown-linux-gnueabihf.tar.gz' '*/nu'
+		elif test "$arch" = 'x64'; then
+			# add_download_option '-x86_64-linux-gnu-full.tar.gz' '*/nu'
+			add_download_option '-x86_64-linux-musl-full.tar.gz' '*/nu'
+		fi
+	elif is-wsl; then
+		if test "$arch" = 'a64'; then
+			add_download_option '-aarch64-windows-msvc-full.zip' 'nu.exe' # uses windows config, rather than wsl config
+		elif test "$arch" = 'x64'; then
+			add_download_option 'x86_64-windows-msvc-full.zip' 'nu.exe' # uses windows config, rather than wsl config
+		fi
+	fi
+	setup-util "${options[@]}"
+	# .msi failed with: This installation package could not be opened. Contact the application vendor to verify that this is a valid Windows Installer package.
+	#
 	# function add_installer_option {
 	# 	options+=(
 	# 		INSTALLER="$(get_github_asset_url "$1")"
 	# 		INSTALLER_OPEN=yes
 	# 	)
 	# }
-	# arch="$(get-arch)"
-	# if is-mac; then
-	# 	if test "$arch" = 'a64'; then
-	# 		add_download_option '-aarch64-apple-darwin.tar.gz'
-	# 	else
-	# 		add_download_option '-x86_64-apple-darwin.tar.gz'
-	# 	fi
-	# elif is-wsl; then
-	# 	if test "$arch" = 'a64'; then
-	# 		add_download_option '-aarch64-pc-windows-msvc.zip'
-	# 		add_installer_option '-aarch64-pc-windows-msvc.msi'
-	# 	elif test "$arch" = 'x64'; then
-	# 		add_download_option '-x86_64-pc-windows-msvc.zip'
-	# 		add_installer_option '-x86_64-pc-windows-msvc.msi'
-	# 	fi
-	# else
-	# 	if test "$arch" = 'r64'; then
-	# 		add_download_option '-riscv64gc-unknown-linux-gnu.tar.gz'
-	# 	elif test "$arch" = 'a64'; then
-	# 		add_download_option '-aarch64-unknown-linux-gnu.tar.gz'
-	# 	elif test "$arch" = 'a32'; then
-	# 		add_download_option '-armv7-unknown-linux-gnueabihf.tar.gz'
-	# 	elif test "$arch" = 'x64'; then
-	# 		# add_download_option '-x86_64-unknown-linux-gnu.tar.gz'
-	# 		add_download_option '-x86_64-unknown-linux-musl.tar.gz'
-	# 	fi
-	# fi
-	setup-util "${options[@]}"
+	# add_installer_option '-aarch64-windows-msvc-full.msi'
+	# add_installer_option '-x86_64-windows-msvc-full.msi'
 
 	# if installed, then configure
 	if command-exists nu; then
