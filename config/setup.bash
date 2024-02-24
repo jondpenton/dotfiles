@@ -47,10 +47,17 @@ source "$DOROTHY/config/setup.bash"
 # HOMEBREW_TAPS=()
 # HOMEBREW_FORMULAS=()
 # HOMEBREW_SLOW_FORMULAS=()
-# HOMEBREW_CASKS=()
-# HOMEBREW_FONTS=()
+HOMEBREW_CASKS=(
+	'alfred'
+	'iterm2'
+	'rectangle'
+)
+HOMEBREW_FONTS=(
+	'font-fira-code-nerd-font'
+	'font-noto-emoji'
+)
 # HOMEBREW_UNINSTALL=()        # for casks and formulas
-# HOMEBREW_ENCODING_INSTALL=''
+HOMEBREW_ENCODING_INSTALL='no'
 
 # Golang / go
 # Used by `setup-go`
@@ -87,13 +94,16 @@ SETUP_UTILS=(
 	'bottom'
 	'carapace'
 	'curl'
-	'devel'
+	'delta'
 	'docker'
 	'dust'
+	'gh'
 	'git'
+	'gpg'
 	'grex'
 	'nu'
 	'ripgrep'
+	'starship'
 	'tree'
 	'vim'
 	'vscode'
