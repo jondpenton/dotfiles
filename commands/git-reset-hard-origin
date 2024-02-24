@@ -1,3 +1,0 @@
-#!/usr/bin/env nu
-
-^git reset --hard $"origin/(^git branch --show-current)"
