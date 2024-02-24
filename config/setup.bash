@@ -50,6 +50,7 @@ source "$DOROTHY/config/setup.bash"
 HOMEBREW_CASKS=(
 	'alfred'
 	'iterm2'
+	'opera-gx'
 	'rectangle'
 )
 HOMEBREW_FONTS=(
