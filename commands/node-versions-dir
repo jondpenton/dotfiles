@@ -1,9 +1,0 @@
-#!/usr/bin/env nu
-
-def fnm_node_versions_dir []: any -> string {
-  ^fnm-dir | path join node-versions
-}
-
-if (^command-exists fnm | complete).exit_code == 0 {
-  fnm_node_versions_dir
-}

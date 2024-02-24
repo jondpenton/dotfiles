@@ -1,3 +1,0 @@
-#!/usr/bin/env nu
-
-^git status --porcelain | is-empty
