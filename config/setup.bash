@@ -49,6 +49,7 @@ source "$DOROTHY/config/setup.bash"
 # HOMEBREW_SLOW_FORMULAS=()
 HOMEBREW_CASKS=(
 	'alfred'
+	'insomnia'
 	'iterm2'
 	'opera-gx'
 	'rectangle'
