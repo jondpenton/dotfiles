@@ -100,6 +100,7 @@ SETUP_UTILS=(
 	'docker'
 	'dust'
 	'gh'
+	'ghq'
 	'git'
 	'gpg'
 	'grex'
