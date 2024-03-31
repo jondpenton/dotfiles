@@ -97,6 +97,7 @@ SETUP_UTILS=(
 	'carapace'
 	'curl'
 	'delta'
+	'direnv'
 	'docker'
 	'dust'
 	'gh'

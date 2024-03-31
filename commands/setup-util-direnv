@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# https://github.com/x-motemen/ghq
+# https://github.com/direnv/direnv
 
-function setup_util_ghq() (
+function setup_util_direnv() (
 	source "$DOROTHY/sources/bash.bash"
 
 	# setup
 	local arch options=(
-		--cli='ghq'
+		--cli='direnv'
 		"$@"
-		BREW='ghq'
+		BREW='direnv'
 	)
 
 	setup-util "${options[@]}"
@@ -17,5 +17,5 @@ function setup_util_ghq() (
 
 # fire if invoked standalone
 if test "$0" = "${BASH_SOURCE[0]}"; then
-	setup_util_ghq "$@"
+	setup_util_direnv "$@"
 fi
