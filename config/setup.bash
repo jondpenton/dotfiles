@@ -93,23 +93,46 @@ GO_LINTING_INSTALL='no'
 SETUP_UTILS=(
 	'bash'
 	'bat'
-	'bottom'
 	'carapace'
 	'curl'
 	'delta'
-	'direnv'
-	'docker'
 	'dust'
-	'gh'
-	'ghq'
 	'git'
-	'gpg'
-	'grex'
-	'nu'
-	'ripgrep'
+	# 'nu'
 	'starship'
 	'tree'
-	'vim'
-	'vscode'
 	'wget'
 )
+
+if is-mac; then
+	SETUP_UTILS+=(
+		'alfred'
+		'appcleaner'
+		'chrome'
+		'direnv'
+		'dive'
+		'docker'
+		'gh'
+		'ghq'
+		'grex'
+		'insomnium'
+		'keka'
+		'ngrok'
+		'nmap'
+		'obsidian'
+		'rectangle'
+		'ripgrep'
+		'tailscale'
+		'tealdeer'
+		'vim'
+		'vlc'
+		'vscode'
+	)
+fi
+
+if is-headless && ! is-wsl; then
+	SETUP_UTILS+=(
+		'bottom'
+		'vim'
+	)
+fi

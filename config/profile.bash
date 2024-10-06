@@ -4,8 +4,8 @@
 
 # Used by `get-profile`, which is used by `setup-git`, `setup-node`
 
-NAME='Jon Penton'
 EMAIL='hey@jondpenton.com'
-# URL=''
-USERNAME='jondpenton'
+NAME='Jon Penton'
 POSSESSIVE_PRONOUN='his'
+USERNAME='jondpenton'
+# URL=''

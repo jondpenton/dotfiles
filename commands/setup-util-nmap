@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# https://github.com/x-motemen/ghq
-
-function setup_util_ghq() (
+function setup_util_nmap() (
 	source "$DOROTHY/sources/bash.bash"
 
 	# improve performance for detectable utilities with conditional assets
@@ -12,9 +10,9 @@ function setup_util_ghq() (
 
 	# setup
 	local options=(
-		--cli='ghq'
+		--cli='nmap'
 		"$@"
-		BREW='ghq'
+		BREW='nmap'
 	)
 
 	setup-util "${options[@]}"
@@ -22,5 +20,5 @@ function setup_util_ghq() (
 
 # fire if invoked standalone
 if test "$0" = "${BASH_SOURCE[0]}"; then
-	setup_util_ghq "$@"
+	setup_util_nmap "$@"
 fi

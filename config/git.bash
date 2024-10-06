@@ -8,12 +8,10 @@ source "$DOROTHY/config/git.bash"
 # Used by `setup-git`
 # You can use `setup-git --configure` to configure these.
 
-GPG_SIGNING_KEY=''
 GIT_DEFAULT_BRANCH='main'
-GIT_PROTOCOL='ssh'
-GIT_NAME='Jon Penton'
 GIT_EMAIL='hey@jondpenton.com'
-MERGE_TOOL='delta'
+GIT_NAME='Jon Penton'
+GIT_PROTOCOL='ssh'
 GITHUB_USERNAME='jondpenton'
 GITLAB_USERNAME='jpenton'
-SSH_IDENTITY_AGENT=''
+MERGE_TOOL='delta'
