@@ -48,11 +48,7 @@ source "$DOROTHY/config/setup.bash"
 # HOMEBREW_FORMULAS=()
 # HOMEBREW_SLOW_FORMULAS=()
 HOMEBREW_CASKS=(
-	'alfred'
-	'insomnia'
 	'iterm2'
-	'opera-gx'
-	'rectangle'
 )
 HOMEBREW_FONTS=(
 	'font-fira-code-nerd-font'
@@ -122,7 +118,7 @@ if is-mac; then
 		'obsidian'
 		'rectangle'
 		'ripgrep'
-		'tailscale'
+		# 'tailscale'
 		'tealdeer'
 		'vim'
 		'vlc'
