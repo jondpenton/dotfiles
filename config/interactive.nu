@@ -1,5 +1,8 @@
 #!/usr/bin/env nu
 
+use std *
+use std/dirs shells-aliases *
+
 # Config
 $env.config.completions.algorithm = 'fuzzy'
 $env.config.datetime_format.table = '%F %T %z' # '2024-06-07 18:15:59 -0400'
