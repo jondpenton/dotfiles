@@ -1,8 +1,5 @@
 #!/usr/bin/env nu
 
-# load the dorothy defaults
-source ~/.local/share/dorothy/config/interactive.nu
-
 # Config
 $env.config.completions.algorithm = 'fuzzy'
 $env.config.datetime_format.table = '%F %T %z' # '2024-06-07 18:15:59 -0400'
