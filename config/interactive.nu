@@ -1,7 +1,9 @@
 #!/usr/bin/env nu
 
-use std *
+overlay use std
 use std/dirs shells-aliases *
+
+overlay new user-config
 
 # Config
 $env.config.completions.algorithm = 'fuzzy'
@@ -35,3 +37,5 @@ $env.XDG_STATE_HOME = '~/.local/state' | path expand
 
 # Paths
 $env.PATH = ($env.PATH | uniq) # Remove duplicates
+
+overlay new session
