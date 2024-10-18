@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+function setup_bin() (
+	source "$DOROTHY/sources/bash.bash"
+
+	# =====================================
+	# Arguments
+
+	function help {
+		cat <<-EOF >/dev/stderr
+			ABOUT:
+			For Applications you already have installed, expose their binaries to PATH by symylinks inside $(echo-style --code="$XDG_BIN_HOME").
+
+			USAGE:
+			setup-bin
+		EOF
+		if test "$#" -ne 0; then
+			echo-error "$@"
+		fi
+		return 22 # EINVAL 22 Invalid argument
+	}
+
+	# process
+	local item
+	while test "$#" -ne 0; do
+		item="$1"
+		shift
+		case "$item" in
+		'--help' | '-h') help ;;
+		'--'*) help "An unrecognised flag was provided: $item" ;;
+		*) help "An unrecognised argument was provided: $item" ;;
+		esac
+	done
+
+	# =====================================
+	# Helpers
+
+	# prepare
+	echo-style --h1='Setup Binaries'
+
+	# symlink_app <app> ...[<existing> <symlink>]
+	function symlink_app {
+		local app path existing symlink
+		# get the app
+		app="$1"
+		shift
+		# get the path
+		path="$(get-app --quiet -- "$app" || :)"
+		if test -n "$path" -a -d "$path"; then
+			# create a symlink for each bin
+			while test "$#" -ne 0; do
+				existing="$path/$1"
+				shift
+				symlink="$XDG_BIN_HOME/$1"
+				shift
+				if test -x "$existing"; then
+					symlink-helper --existing="$existing" --symlink="$symlink"
+				fi
+			done
+		fi
+	}
+
+	# =====================================
+	# Binaries
+
+	# Atom
+	symlink_app 'Atom.app' \
+		'Contents/Resources/app/atom.sh' 'atom' \
+		'Contents/Resources/app/apm/bin/apm' 'apm'
+
+	# Visual Studio Code - Insiders
+	symlink_app 'Visual Studio Code - Insiders.app' \
+		'Contents/Resources/app/bin/code' 'code'
+
+	# Visual Studio Code - Flatpak
+	if command-exists -- flatpak && flatpak info com.visualstudio.code &>/dev/null; then
+		cat <<-EOF >"$XDG_BIN_HOME/code"
+			#!/usr/bin/env bash
+			flatpak run com.visualstudio.code "\$@"
+		EOF
+		chmod +x "$XDG_BIN_HOME/code"
+	fi
+
+	# Visual Studio Code
+	symlink_app 'Visual Studio Code.app' \
+		'Contents/Resources/app/bin/code' 'code'
+
+	# GitHub
+	symlink_app 'GitHub.app' \
+		'Contents/MacOS/github_cli' 'github'
+
+	# Tower
+	symlink_app 'Tower.app' \
+		'Contents/MacOS/gittower' 'tower'
+
+	# GitFox
+	symlink_app 'Gitfox.app' \
+		'Contents/SharedSupport/bin/gitfox-cli' 'gitfox'
+
+	# Kaleidoscope
+	symlink_app 'Kaleidoscope.app' \
+		'Contents/Resources/bin/ksdiff' 'ksdiff'
+
+	# =====================================
+	# Permissions
+
+	# gsed symlink requires sudo
+	# [stat  -c %U "$(fs-realpath "$XDG_BIN_HOME/gsed")"] returns [root] however that is so involved for this check
+	if ! is-wsl; then
+		fs-own --sudo --permissions='+x' \
+			-- "$XDG_BIN_HOME/"*
+	fi
+
+	# =====================================
+	# Done
+
+	echo-style --g1='Setup Binaries'
+)
+
+# fire if invoked standalone
+if test "$0" = "${BASH_SOURCE[0]}"; then
+	setup_bin "$@"
+fi

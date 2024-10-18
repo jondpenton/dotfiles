@@ -129,12 +129,12 @@ function setup_node() (
 	}
 
 	# check
-	if
+	if ! is-wsl && (
 		is-empty-value -- "$(npm config get init-author-name)" ||
 			is-empty-value -- "$(npm config get init-author-email)" ||
 			is-empty-value -- "$(npm config get init-author-url)" ||
 			is-empty-value -- "$(npm config get init-license)"
-	then
+	); then
 		option_configure='yes'
 	fi
 
