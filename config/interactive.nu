@@ -42,4 +42,5 @@ def --wrapped nix [...rest] {
 	^nix ...$rest --extra-experimental-features nix-command
 }
 
+overlay use ../commands
 overlay new session
