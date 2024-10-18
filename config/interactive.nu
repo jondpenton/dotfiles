@@ -1,9 +1,9 @@
 #!/usr/bin/env nu
 
-overlay use std
-use std/dirs shells-aliases *
-
 overlay new user-config
+
+use std *
+use std/dirs shells-aliases *
 
 # Config
 $env.config.completions.algorithm = 'fuzzy'
@@ -37,5 +37,9 @@ $env.XDG_STATE_HOME = '~/.local/state' | path expand
 
 # Paths
 $env.PATH = ($env.PATH | uniq) # Remove duplicates
+
+def --wrapped nix [...rest] {
+	^nix ...$rest --extra-experimental-features nix-command
+}
 
 overlay new session
