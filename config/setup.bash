@@ -92,13 +92,19 @@ SETUP_UTILS=(
 	'carapace'
 	'curl'
 	'delta'
-	'dust'
 	'git'
 	# 'nu'
 	'starship'
 	'tree'
 	'wget'
 )
+
+if is-headless || is-mac; then
+	SETUP_UTILS+=(
+		'bottom'
+		'vim'
+	)
+fi
 
 if is-mac; then
 	SETUP_UTILS+=(
@@ -108,6 +114,7 @@ if is-mac; then
 		'direnv'
 		'dive'
 		'docker'
+		'dust'
 		'gh'
 		'ghq'
 		'grex'
@@ -120,15 +127,7 @@ if is-mac; then
 		'ripgrep'
 		# 'tailscale'
 		'tealdeer'
-		'vim'
 		'vlc'
 		'vscode'
-	)
-fi
-
-if is-headless && ! is-wsl; then
-	SETUP_UTILS+=(
-		'bottom'
-		'vim'
 	)
 fi

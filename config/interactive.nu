@@ -38,5 +38,5 @@ $env.XDG_STATE_HOME = '~/.local/state' | path expand
 # Paths
 $env.PATH = ($env.PATH | uniq) # Remove duplicates
 
-overlay use ../commands
+overlay use ../commands as user-commands
 overlay new session
