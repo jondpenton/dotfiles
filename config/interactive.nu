@@ -36,7 +36,14 @@ $env.XDG_DATA_HOME = '~/.local/share' | path expand
 $env.XDG_STATE_HOME = '~/.local/state' | path expand
 
 # Paths
-$env.PATH = ($env.PATH | uniq) # Remove duplicates
+$env.PATH = (
+	$env.PATH
+		| filter { path exists }
+		| path expand --no-symlink
+		| path parse
+		| path join
+		| uniq # Remove duplicates
+)
 
 overlay use ../commands as user-commands
 overlay new session
