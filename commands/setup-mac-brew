@@ -234,7 +234,7 @@ function setup_mac_brew() (
 
 	# update brew
 	function update_brew {
-		brew upgrade --quiet
+		brew upgrade --greedy --quiet
 	}
 
 	# install encoding tools
