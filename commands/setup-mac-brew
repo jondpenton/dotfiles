@@ -554,7 +554,7 @@ function setup_mac_brew() (
 	fi
 
 	# install fonts
-	if test "$action" = 'install'; then
+	if test "$action" = 'install' -o "$action" = 'update'; then
 		brew_install_fonts "${HOMEBREW_FONTS[@]}"
 	fi
 
