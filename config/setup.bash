@@ -52,6 +52,7 @@ HOMEBREW_CASKS=(
 )
 HOMEBREW_FONTS=(
 	'font-fira-code-nerd-font'
+	'font-inter'
 	'font-noto-emoji'
 )
 # HOMEBREW_UNINSTALL=()        # for casks and formulas
