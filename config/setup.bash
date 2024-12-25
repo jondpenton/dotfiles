@@ -47,14 +47,16 @@ source "$DOROTHY/config/setup.bash"
 # HOMEBREW_TAPS=()
 # HOMEBREW_FORMULAS=()
 # HOMEBREW_SLOW_FORMULAS=()
-HOMEBREW_CASKS=(
-	'iterm2'
-)
-HOMEBREW_FONTS=(
-	'font-fira-code-nerd-font'
-	'font-inter'
-	'font-noto-emoji'
-)
+# HOMEBREW_CASKS=()
+
+if ! is-headless; then
+	HOMEBREW_FONTS=(
+		'font-fira-code-nerd-font'
+		'font-inter'
+		'font-noto-emoji'
+	)
+fi
+
 # HOMEBREW_UNINSTALL=()        # for casks and formulas
 HOMEBREW_ENCODING_INSTALL='no'
 
@@ -82,7 +84,9 @@ GO_LINTING_INSTALL='no'
 
 # Rust / Cargo / Crates.io
 # Used by `setup-rust`
-# CARGO_INSTALL=()
+if ! is-headless; then
+	CARGO_INSTALL=('nu')
+fi
 
 # Utilities to install, these are the [setup-util-*] scripts
 # Used by `setup-utils`
@@ -98,6 +102,10 @@ SETUP_UTILS=(
 	'tree'
 	'wget'
 )
+
+if is-headless; then
+	SETUP_UTILS+=('nu')
+fi
 
 if is-headless || is-mac; then
 	SETUP_UTILS+=(
@@ -118,6 +126,7 @@ if is-mac; then
 		'ghq'
 		'grex'
 		'insomnium'
+		'iterm2'
 		'keka'
 		'ngrok'
 		'nmap'

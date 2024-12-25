@@ -93,7 +93,7 @@ function setup_rust() (
 	# Packages
 
 	setup-util --installer=CARGO -- "${CARGO_INSTALL[@]}"
-	cargo install cargo-update
+	cargo install --locked cargo-update
 	cargo install-update --all
 
 	# =====================================
