@@ -1,8 +1,9 @@
-export def main []: string -> any {
-	match $nu.os-info.name {
+export def main []: any -> any {
+	to text | match $nu.os-info.name {
 		'macos' => ^pbcopy,
 		'windows' => ^clip.exe
+
 		# TODO: Linux
-		_ => { error make { msg: $'Unsupported OS: "($in)"' } }
+		$os_name => { error make { msg: $'Unsupported OS: "($os_name)"' } }
 	}
 }
