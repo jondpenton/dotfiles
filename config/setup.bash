@@ -12,9 +12,7 @@ source "$DOROTHY/config/setup.bash"
 # Apt / apt-get
 # Used by `setup-linux`
 # APT_UNINSTALL=()
-APT_INSTALL=(
-	'sd'
-)
+# APT_INSTALL=()
 
 # AUR / pamac / pacman / yay / paru / pakku / aurutils
 # Used by `setup-linux`
@@ -114,6 +112,10 @@ if is-headless || is-mac; then
 		'bottom'
 		'vim'
 	)
+fi
+
+if is-linux; then
+	SETUP_UTILS+=('sd')
 fi
 
 if is-mac; then
