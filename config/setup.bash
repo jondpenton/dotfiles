@@ -12,7 +12,9 @@ source "$DOROTHY/config/setup.bash"
 # Apt / apt-get
 # Used by `setup-linux`
 # APT_UNINSTALL=()
-# APT_INSTALL=()
+APT_INSTALL=(
+	'sd'
+)
 
 # AUR / pamac / pacman / yay / paru / pakku / aurutils
 # Used by `setup-linux`
