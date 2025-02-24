@@ -9,7 +9,8 @@ use std/dirs shells-aliases *
 $env.config.completions.algorithm = 'fuzzy'
 $env.config.cursor_shape.emacs = 'line'
 $env.config.datetime_format.table = '%F %T %z' # '2024-06-07 18:15:59 -0400'
-$env.config.filesize.metric = true
+$env.config.filesize.precision = 4
+$env.config.filesize.unit = 'metric'
 $env.config.float_precision = 4
 $env.config.footer_mode = 'always'
 $env.config.highlight_resolved_externals = true
@@ -20,7 +21,7 @@ $env.config.hooks.pre_prompt = [
 	{
 		if not (
 			'.envrc' | path exists
-		) or (^command-exists direnv | complete).exit_code != 0 {
+		) or (which --all direnv | where type == external | is-empty) {
 			return
 		}
 
