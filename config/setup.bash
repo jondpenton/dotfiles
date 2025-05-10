@@ -84,9 +84,7 @@ GO_LINTING_INSTALL='no'
 
 # Rust / Cargo / Crates.io
 # Used by `setup-rust`
-if ! is-headless; then
-	CARGO_INSTALL=('nu --features system-clipboard --locked')
-fi
+# CARGO_INSTALL=()
 
 # Utilities to install, these are the [setup-util-*] scripts
 # Used by `setup-utils`
@@ -98,14 +96,11 @@ SETUP_UTILS=(
 	'curl'
 	'delta'
 	'git'
+	'nu'
 	'starship'
 	'tree'
 	'wget'
 )
-
-if is-headless; then
-	SETUP_UTILS+=('nu')
-fi
 
 if is-headless || is-mac; then
 	SETUP_UTILS+=(

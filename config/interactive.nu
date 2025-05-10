@@ -43,6 +43,7 @@ $env.XDG_STATE_HOME = '~/.local/state' | path expand
 # Paths
 $env.PATH = (
 	$env.PATH
+		| split row :
 		| filter { path exists }
 		| path expand --no-symlink
 		| path parse
